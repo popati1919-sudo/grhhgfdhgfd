@@ -1,0 +1,10 @@
+BUILD FIXES — ECLIPSE / WINDOWS / GD 2.2091
+
+1) Geode bindings are pinned to 6d07d9afba68cf7f69cc37f360c4ffe35b1c0cc2.
+2) gd-imgui-cocos is downloaded from the original prevter repository as an archive at
+   e66d02bef18f15105500b914a12f2a2d9bb59f21 (not the matcool fork).
+3) CPM cache is disabled to prevent reusing the broken dependency checkout.
+4) GitHub Actions now errors if the .geode artifact is missing.
+
+No full Windows build or in-game test has been run here. Do not treat this as a
+confirmed working release until the GitHub Actions run succeeds.
