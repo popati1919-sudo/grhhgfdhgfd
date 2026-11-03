@@ -19,9 +19,27 @@ namespace eclipse::hacks::Creator {
 
     class $modify(ResetPercentEPLHook, EditorPauseLayer) {
         ADD_HOOKS_DELEGATE("creator.resetpercentonsave")
-        void saveLevel() {
-            if (m_editorLayer->m_level->m_levelType == GJLevelType::Editor) m_editorLayer->m_level->m_normalPercent = 0;
-            EditorPauseLayer::saveLevel();
+
+        void resetPercentBeforeSave() {
+            if (m_editorLayer && m_editorLayer->m_level &&
+                m_editorLayer->m_level->m_levelType == GJLevelType::Editor) {
+                m_editorLayer->m_level->m_normalPercent = 0;
+            }
+        }
+
+        void onSave(cocos2d::CCObject* sender) {
+            resetPercentBeforeSave();
+            EditorPauseLayer::onSave(sender);
+        }
+
+        void onSaveAndExit(cocos2d::CCObject* sender) {
+            resetPercentBeforeSave();
+            EditorPauseLayer::onSaveAndExit(sender);
+        }
+
+        void onSaveAndPlay(cocos2d::CCObject* sender) {
+            resetPercentBeforeSave();
+            EditorPauseLayer::onSaveAndPlay(sender);
         }
     };
 }
