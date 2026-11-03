@@ -3,10 +3,12 @@ add_library(third_party INTERFACE)
 
 # Include libraries
 add_library(imgui INTERFACE)
+# Use the source archive instead of git clone. The Windows GitHub Actions
+# runner repeatedly loses the imgui Git transfer (curl 18 / early EOF).
+# This archive URL pins the same revision as the previous GIT_TAG.
 CPMAddPackage(
     NAME imgui
-    GIT_REPOSITORY https://git.eclipse.menu/EclipseMenu/imgui.git
-    GIT_TAG 8cf1bfc
+    URL https://git.eclipse.menu/EclipseMenu/imgui/archive/8cf1bfc.zip
 )
 target_include_directories(imgui INTERFACE ${imgui_SOURCE_DIR})
 target_sources(imgui INTERFACE

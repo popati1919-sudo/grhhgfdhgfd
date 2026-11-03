@@ -14,3 +14,8 @@ The ZIP has been structurally checked, but it has not been compiled in a Windows
 
 ## V5 - PlayLayer::init Geode 6
 - Updated all remaining PlayLayer init hooks to the Geode 6 two-argument signature `init(GJGameLevel*, bool dontCreateObjects)` and updated their base calls accordingly. This addresses the SafeMode.cpp compiler error and prevents the same signature mismatch in other source files.
+
+
+## ImGui download workaround
+
+Changed the ImGui dependency from a Git clone at revision `8cf1bfc` to the Gitea source archive URL `https://git.eclipse.menu/EclipseMenu/imgui/archive/8cf1bfc.zip` to avoid the repeated Git transport failures reported by GitHub Actions (`curl 18`, `early EOF`). The archive endpoint has not been validated from this environment; rerun the workflow to confirm that the host serves this URL.
