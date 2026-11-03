@@ -4,6 +4,7 @@
 #include <modules/hack/hack.hpp>
 
 #include <Geode/modify/EffectGameObject.hpp>
+#include <Geode/modify/GJBaseGameLayer.hpp>
 
 namespace eclipse::hacks::Level {
     class $hack(MuteLevelSFX) {
