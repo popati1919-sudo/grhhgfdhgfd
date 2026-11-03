@@ -28,8 +28,8 @@ if (NOT ANDROID AND NOT IOS)
     )
 endif()
 
-# Download the exact upstream revision as an archive instead of asking Git/CPM
-# to materialize a commit tree (the Windows runner previously failed at that step).
+# Fetch the known revision as a source archive; the previous CPM Git checkout
+# failed to read this commit tree on the Windows runner.
 CPMAddPackage(
     NAME gd-imgui-cocos
     URL https://codeload.github.com/prevter/gd-imgui-cocos/zip/e66d02bef18f15105500b914a12f2a2d9bb59f21

@@ -16,7 +16,6 @@
 
 #include <rift/config.hpp>
 
-#include <dankmeme.globed2/include/globed/soft-link/Wrappers.hpp>
 
 namespace eclipse::labels {
     static std::vector<EffectGameObject*> s_coins;
@@ -702,25 +701,17 @@ namespace eclipse::labels {
     static void fetchGlobedData(rift::Object& variables) {
         auto& globed = variables["globed"];
 
+        // The optional Globed dependency currently exposes a soft-link header
+        // using the pre-Geode-6 GEODE_EVENT_EXPORT signature. Avoid including
+        // that incompatible header in Geode 6 builds. Keep the availability
+        // flag and stable default values so existing label scripts still work.
         auto enabled = geode::Loader::get()->isModLoaded("dankmeme.globed2");
         globed[std::string("enabled")] = enabled;
-
-        if (enabled) {
-            // net
-            globed[std::string("isConnected")] = globed::api::net::isConnected();
-            globed[std::string("ping")] = (int64_t)globed::api::net::getGamePingMs();
-            globed[std::string("centralPing")] = (int64_t)globed::api::net::getCentralPingMs();
-            globed[std::string("tps")] = (int64_t)globed::api::net::getGameTickrate();
-
-            // suggestion for daniel meme to add:
-            // serverName
-            // roomName
-            // roomId
-            // other room things
-
-            // globed[std::string("playersOnline")] = (int64_t)globed::api::player::playersOnline();
-            globed[std::string("playersOnLevel")] = (int64_t)globed::api::game::getPlayerCount();
-        }
+        globed[std::string("isConnected")] = false;
+        globed[std::string("ping")] = int64_t{0};
+        globed[std::string("centralPing")] = int64_t{0};
+        globed[std::string("tps")] = int64_t{0};
+        globed[std::string("playersOnLevel")] = int64_t{0};
     }
 
     void VariableManager::refetch() {

@@ -10,25 +10,27 @@ jobs:
   build:
     runs-on: windows-latest
     timeout-minutes: 60
+    env:
+      GEODE_BINDINGS_REPO_PATH: ${{ github.workspace }}/bindings-pinned
     steps:
       - name: Checkout Eclipse
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # This bindings revision is the last one that successfully passed
-      # Codegen for this GD 2.2091 / Geode 6 alpha project.
-      - name: Build Eclipse
+      - name: Clone and pin Geode bindings
+        shell: bash
+        run: |
+          git clone https://github.com/geode-sdk/bindings.git bindings-pinned
+          git -C bindings-pinned checkout --detach 6d07d9afba68cf7f69cc37f360c4ffe35b1c0cc2
+
+      - name: Build
         id: build
         uses: geode-sdk/build-geode-mod@main
         with:
           sdk: "given"
           target: Win64
           build-config: Release
-          bindings: geode-sdk/bindings
-          bindings-ref: 6d07d9afba68cf7f69cc37f360c4ffe35b1c0cc2
-          # Avoid reusing a stale CPM cache containing the broken dependency checkout.
-          use-cpm-cache: false
 
       - name: Upload .geode
         uses: actions/upload-artifact@v4
