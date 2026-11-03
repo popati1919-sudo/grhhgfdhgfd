@@ -3,6 +3,8 @@
 #include <modules/gui/components/toggle.hpp>
 #include <modules/hack/hack.hpp>
 
+#include <Geode/Geode.hpp>
+
 #include <Geode/modify/EffectGameObject.hpp>
 #include <Geode/modify/GJBaseGameLayer.hpp>
 
