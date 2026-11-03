@@ -10,3 +10,7 @@ This archive includes compatibility changes for the Windows x64 GitHub Actions b
 - Replaces the unsupported inline `EditorPauseLayer::saveLevel` hook with hooks on the non-inline `onSave`, `onSaveAndExit`, and `onSaveAndPlay` handlers. The level percentage is reset before those save actions.
 
 The ZIP has been structurally checked, but it has not been compiled in a Windows Geode toolchain. Run the GitHub Actions workflow to validate the build.
+
+
+## V5 - PlayLayer::init Geode 6
+- Updated all remaining PlayLayer init hooks to the Geode 6 two-argument signature `init(GJGameLevel*, bool dontCreateObjects)` and updated their base calls accordingly. This addresses the SafeMode.cpp compiler error and prevents the same signature mismatch in other source files.
