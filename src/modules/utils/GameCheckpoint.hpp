@@ -21,9 +21,6 @@ namespace eclipse::utils {
             m_currentStep = playLayer->m_currentStep;
             m_unk3380 = playLayer->m_unk3380;
 
-            #ifndef GEODE_IS_ANDROID
-            m_gameObjectPhysics = playLayer->m_gameState.m_gameObjectPhysics;
-            #endif
         }
 
         void apply(PlayLayer* playLayer) {
@@ -38,9 +35,6 @@ namespace eclipse::utils {
             playLayer->m_currentStep = m_currentStep;
             playLayer->m_unk3380 = m_unk3380;
 
-            #ifndef GEODE_IS_ANDROID
-            playLayer->m_gameState.m_gameObjectPhysics = m_gameObjectPhysics;
-            #endif
         }
 
         private:
@@ -54,10 +48,6 @@ namespace eclipse::utils {
         int m_currentStep;
         float m_unk3380;
 
-        #ifndef GEODE_IS_ANDROID
-        //GameState
-        std::unordered_map<int, GameObjectPhysics> m_gameObjectPhysics;
-        #endif
     };
 
     class FixPlayerCheckpoint {
@@ -320,10 +310,8 @@ namespace eclipse::utils {
 
             m_rotateObjectsRelated = player->m_rotateObjectsRelated; // unordered_map<int, GJPointDouble>
             m_potentialSlopeMap = player->m_potentialSlopeMap;       // unordered_map<int, GameObject*>
-            m_ringRelatedSet = player->m_ringRelatedSet;             // unordered_set<int>
             m_touchedRings = player->m_touchedRings;                 // unordered_set<int>
 
-            m_jumpPadRelated = player->m_jumpPadRelated;             // map<int, bool>
             m_playerFollowFloats = player->m_playerFollowFloats;     // vector<float>
 
             m_currentRobotAnimation = player->m_currentRobotAnimation;
@@ -591,10 +579,8 @@ namespace eclipse::utils {
 
             player->m_rotateObjectsRelated = m_rotateObjectsRelated;
             player->m_potentialSlopeMap = m_potentialSlopeMap;
-            player->m_ringRelatedSet = m_ringRelatedSet;
             player->m_touchedRings = m_touchedRings;
 
-            player->m_jumpPadRelated = m_jumpPadRelated;
             player->m_playerFollowFloats = m_playerFollowFloats;
 
             player->m_currentRobotAnimation = m_currentRobotAnimation;
@@ -862,9 +848,7 @@ namespace eclipse::utils {
         #ifndef GEODE_IS_ANDROID
         std::unordered_map<int, GJPointDouble> m_rotateObjectsRelated;
         std::unordered_map<int, GameObject*> m_potentialSlopeMap;
-        std::unordered_set<int> m_ringRelatedSet;
         std::unordered_set<int> m_touchedRings;
-        std::map<int, bool> m_jumpPadRelated;
         std::vector<float> m_playerFollowFloats;
         std::vector<CCObject*> m_touchingRings;
         std::string m_currentRobotAnimation;
