@@ -21,3 +21,8 @@ This addresses the exact compiler errors in the supplied log. A successful
 Windows Actions build and an in-game test have not yet been run, so this is
 not a guaranteed final release. If the next run reports a new compiler error,
 that will be the next issue to fix.
+
+
+## Correctifs V3 (journal du 2 novembre 2026)
+- `Bot.cpp`: adapte le hook `PlayLayer::init` à la signature Geode 6 (`GJGameLevel*, bool`).
+- `MemoryPracticeFix.cpp`: remplace la borne inexistante `m_ringRelatedSet` par le champ existant `m_objectSnappedTo` pour conserver la surveillance de cette plage mémoire.
