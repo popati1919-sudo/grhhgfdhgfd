@@ -25,7 +25,9 @@ if (DEFINED ENV{GITHUB_ACTIONS})
   target_compile_definitions(${PROJECT_NAME} PRIVATE GITHUB_ACTIONS)
   message(STATUS "GitHub Actions build detected")
   set(ECLIPSE_DISABLE_INCREMENTAL_LINK ON)
-  # Geode 6 introduces geode::Label; keep third-party AdvancedLabel.cpp\n  # in its own translation unit to avoid a unity-build name collision.\n  set(ECLIPSE_ENABLE_UNITY_BUILD OFF)
+  # Geode 6 introduces geode::Label; keep third-party AdvancedLabel.cpp
+  # in its own translation unit to avoid a unity-build name collision.
+  set(ECLIPSE_ENABLE_UNITY_BUILD OFF)
 endif()
 
 if (ECLIPSE_ENABLE_UNITY_BUILD)

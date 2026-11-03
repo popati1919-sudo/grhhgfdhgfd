@@ -15,6 +15,7 @@
 #include <Geode/modify/PlayLayer.hpp>
 
 #include <rift/config.hpp>
+#include <unordered_map>
 
 
 namespace eclipse::labels {
@@ -382,7 +383,7 @@ namespace eclipse::labels {
         }
     }
 
-    inline int getStatIndex(int i, gd::unordered_map<int, int> const& seeds, gd::unordered_map<int, int> const& rands) {
+    inline int getStatIndex(int i, std::unordered_map<int, int> const& seeds, std::unordered_map<int, int> const& rands) {
         auto rand = rands.find(i);
         auto seed = seeds.find(i);
         if (rand != rands.end() && seed != seeds.end()) {

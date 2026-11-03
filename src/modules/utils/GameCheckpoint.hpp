@@ -1,6 +1,7 @@
 #pragma once
 #include "modules/utils/SingletonCache.hpp"
 #include <Geode/binding/PlayerObject.hpp>
+#include <unordered_map>
 
 using namespace geode::prelude;
 
@@ -55,7 +56,7 @@ namespace eclipse::utils {
 
         #ifndef GEODE_IS_ANDROID
         //GameState
-        gd::unordered_map<int, GameObjectPhysics> m_gameObjectPhysics;
+        std::unordered_map<int, GameObjectPhysics> m_gameObjectPhysics;
         #endif
     };
 
