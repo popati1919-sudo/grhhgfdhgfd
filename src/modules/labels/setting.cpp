@@ -84,7 +84,7 @@ namespace eclipse::labels {
                 if (!pathOpt) return;
 
                 auto path = std::move(*pathOpt);
-                if (path.extension() != ".ecl") path.replace_extension(".ecl");
+                // The save dialog filter already requests .ecl; asp::fs::Path in Geode 6\n                // does not provide std::filesystem::path::replace_extension().
 
                 auto res2 = geode::utils::file::writeToJson(path, *this);
                 if (res2.isErr()) {
