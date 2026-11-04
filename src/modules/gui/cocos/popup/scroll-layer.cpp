@@ -6,10 +6,12 @@
 // and also from https://github.com/geode-sdk/geode
 
 namespace eclipse::gui::cocos {
-    void ScrollLayer::scrollWheel(float pointX, float pointY) {
-        if (pointX != 0.0) {
-            CCScrollLayerExt::scrollLayer(pointX);
+    bool ScrollLayer::scrollWheel(float y, float x) {
+        if (!m_scrollWheelEnabled || y == 0.0f) {
+            return false;
         }
+        CCScrollLayerExt::scrollLayer(y);
+        return true;
     }
     bool ScrollLayer::ccTouchBegan(cocos2d::CCTouch *touch, cocos2d::CCEvent *event) {
         if (geode::cocos::nodeIsVisible(this)) {
