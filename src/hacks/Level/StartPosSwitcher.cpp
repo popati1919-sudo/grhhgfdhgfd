@@ -81,19 +81,14 @@ namespace eclipse::hacks::Level {
             auto func = [index] {
                 startPosSwitcherSequence = nullptr;
                 PlayLayer* playLayer = utils::get<PlayLayer>();
-                playLayer->m_currentCheckpoint = nullptr;
+                if (!playLayer) return;
 
                 auto* startPos = index >= 0 ? startPosObjects[index] : nullptr;
-                playLayer->setStartPosObject(startPos);
-                playLayer->m_isTestMode = index >= 0;
 
-                if (playLayer->m_isPracticeMode)
-                    playLayer->resetLevelFromStart();
-                else
-                    playLayer->resetLevel();
-
-                playLayer->startMusic();
-                playLayer->updateTestModeLabel();
+                // Geode bindings for GD 2.2091 expose switchToStartPosObject().
+                // It updates the active start position and performs the required reset,
+                // camera refresh, test-mode label update, and music restart.
+                playLayer->switchToStartPosObject(startPos);
             };
 
             float delay = config::get<double>("level.startpos_switcher.delay", 0.f);
