@@ -2,6 +2,9 @@ name: Build Eclipse (Windows, GD 2.2091, Geode 6.0.0-alpha.1)
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
